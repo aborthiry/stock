@@ -23,8 +23,10 @@ class PuntoDeVenta(models.Model):
     nombre = models.CharField(max_length=100)
     direccion = models.CharField(max_length=50)
     telefono = models.CharField(max_length=50)
+    
     def __str__(self):
         return self.nombre
+
 
 class Stock(models.Model):
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
@@ -34,14 +36,15 @@ class Stock(models.Model):
         unique_together = (("libro", "puntodeventa"),)
 
 
-class Orden(models.Model):
-    TIPO_DE_ORDEN = (
+TIPO_DE_ORDEN = (
         ('1', 'Salida - Venta'),
         ('2', 'Salida - Distribución'),
         ('3', 'Salida - Donación'),
         ('4', 'Entrada - Impresión'),
         ('5', 'Entrada - Distribución'),
-    )
+)
+
+class Orden(models.Model):
     
     tipodeorden = models.CharField(max_length=1, choices=TIPO_DE_ORDEN,default='1')
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
@@ -50,5 +53,6 @@ class Orden(models.Model):
     nota = models.TextField(blank=True, null=True)
     fechaorden =  models.DateTimeField(auto_now_add=True, blank=False)
     
-    
+    def __str__(self):
+        return str(self.fechaorden)
     

@@ -19,9 +19,22 @@ class OrdenAdmin(admin.ModelAdmin):
     search_fields = ('libro',)
     list_filter = ('fechaorden',)
 
+class ColeccionAdmin(admin.ModelAdmin):
+    list_display = ('nombre',)
+
+class PuntoDeVentaAdmin(admin.ModelAdmin):
+    list_display = ('telefono',)
+
+
 
 admin.site.register(Libro, LibroAdmin)
-admin.site.register(PuntoDeVenta)
-admin.site.register(Coleccion)
+admin.site.register(PuntoDeVenta, PuntoDeVentaAdmin)
+admin.site.register(Coleccion, ColeccionAdmin)
 admin.site.register(Orden, OrdenAdmin)
+
+#cambia el admin 
+admin.site.site_header = 'Control de Inventario Editorial UNICEN'
+admin.site.site_title = 'Editorial Unicen'
+
+
 
