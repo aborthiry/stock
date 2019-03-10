@@ -31,9 +31,19 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'smart_selects',
     'inventario.apps.InventarioConfig',
+    #'django_sb_admin',
+    #'jet_django',
+    #'material',
+    #'django_admin_bootstrapped',
+    #'bootstrap_admin',
+    #'grappelli',
+    #'suit',
     'jet',
     'django.contrib.admin',
+    
+    
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -125,4 +135,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-JET_DEFAULT_THEME = 'light-violet'
+#jet
+JET_DEFAULT_THEME = 'light-gray'
+JET_SIDE_MENU_COMPACT = True
+
+
+
+
+
+# disable auto-import of jquery from django-smart-select
+USE_DJANGO_JQUERY = True 
+
+

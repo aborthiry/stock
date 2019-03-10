@@ -17,9 +17,19 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 
+
 urlpatterns = [
-     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
     path('admin/', admin.site.urls),
 
-     path('inventario/', include('inventario.urls')),
+    path('inventario/', include('inventario.urls')),
+    url(r'^chaining/', include('smart_selects.urls')),
+
+    path('grappelli/', include('grappelli.urls')), # grappelli URLS
+    
+    url(r'^django-sb-admin/', include('django_sb_admin.urls')),
+
+
+    
+
 ]
