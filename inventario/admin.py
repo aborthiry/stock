@@ -57,8 +57,8 @@ class PuntoDeVentaAdmin(admin.ModelAdmin):
 class StockAdmin(admin.ModelAdmin):
     # ...
     list_display = ('libro', 'puntodeventa','cantidad')
-    search_fields = ('libro',)
-    list_filter = ('puntodeventa',)
+    #search_fields = ('libro',)
+    list_filter = ('puntodeventa','libro',)
     actions = None
 
     #no permite agregar al stock direcamente, debe usar una orden

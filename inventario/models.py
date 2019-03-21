@@ -19,19 +19,19 @@ class Coleccion(models.Model):
 
 class Libro(models.Model):
     isbn = models.CharField(max_length=20,primary_key=True)
-    coleccion = models.ForeignKey(Coleccion, on_delete=models.PROTECT)
+    coleccion = models.ForeignKey(Coleccion, on_delete=models.PROTECT,verbose_name="Colección",)
     autor = models.CharField(max_length=100)
-    titulo = models.CharField(max_length=200)
-    paginas = models.PositiveIntegerField()
+    titulo = models.CharField("Título",max_length=200)
+    paginas = models.PositiveIntegerField("Páginas")
     precio = models.DecimalField(max_digits=5, decimal_places=2)
-    anio =  models.PositiveIntegerField()
+    anio =  models.PositiveIntegerField("Año")
     def __str__(self):
         return self.titulo
     
 class PuntoDeVenta(models.Model):
     nombre = models.CharField(max_length=100)
-    direccion = models.CharField(max_length=50)
-    telefono = models.CharField(max_length=50)
+    direccion = models.CharField("Dirección", max_length=50)
+    telefono = models.CharField("Teléfono", max_length=50)
     
     def __str__(self):
         return self.nombre
@@ -43,7 +43,7 @@ class PuntoDeVenta(models.Model):
 
 class Stock(models.Model):
     libro = models.ForeignKey(Libro, on_delete=models.PROTECT)
-    puntodeventa = models.ForeignKey(PuntoDeVenta, on_delete=models.PROTECT)
+    puntodeventa = models.ForeignKey(PuntoDeVenta, on_delete=models.PROTECT,verbose_name="Punto de venta")
     cantidad = models.PositiveIntegerField()
     class Meta:
         unique_together = (("libro", "puntodeventa"),)
@@ -78,7 +78,7 @@ class OrdenClasificada(models.Model):
 
 class Orden(models.Model):
     
-    tipodeorden = models.CharField(max_length=1, choices=TIPO_DE_ORDEN,default='1')
+    tipodeorden = models.CharField("Tipo de orden", max_length=1, choices=TIPO_DE_ORDEN,default='1')
     '''  tipoorden = models.ForeignKey(TipoOrden,on_delete=models.PROTECT)
     ordenclasificada = ChainedForeignKey(
         OrdenClasificada,
@@ -89,7 +89,7 @@ class Orden(models.Model):
         blank=True, null=True,
         on_delete=models.PROTECT) '''
     libro = models.ForeignKey(Libro, on_delete=models.PROTECT)
-    puntodeventa = models.ForeignKey(PuntoDeVenta, on_delete=models.PROTECT)
+    puntodeventa = models.ForeignKey(PuntoDeVenta, on_delete=models.PROTECT,verbose_name="Punto de venta")
     cantidad = models.PositiveIntegerField()
     nota = models.TextField(blank=True, null=True)
     fechaorden =  models.DateTimeField(auto_now_add=True, blank=False)
