@@ -19,8 +19,8 @@ class OrdenAdmin(admin.ModelAdmin):
     # ...
     name = 'Ordenes'
     list_display = ('libro', 'puntodeventa','cantidad','fechaorden','added_by')
-    search_fields = ('libro',)
-    list_filter = ('fechaorden',)
+    #search_fields = ('libro','puntodeventa')
+    list_filter = ('libro','puntodeventa','fechaorden',)
     exclude = ['added_by',]
     actions = None # no hay acciones sobre este modelo para mantener la coherecia del stock vs ordenes
 
@@ -33,6 +33,7 @@ class OrdenAdmin(admin.ModelAdmin):
             stock = None
         
         if stock is not None: # ya existe el stock, lo actulizo
+            cantidadaux = obj.cantidad
             if int(obj.tipodeorden) < 3: # orde de salida por ende descuento
                 cantidadaux = obj.cantidad * -1
 
