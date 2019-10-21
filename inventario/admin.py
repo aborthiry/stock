@@ -18,7 +18,7 @@ class LibroAdmin(admin.ModelAdmin):
 class OrdenAdmin(admin.ModelAdmin):
     # ...
     name = 'Ordenes'
-    list_display = ('libro', 'puntodeventa','cantidad','fechaorden','added_by')
+    list_display = ('libro', 'puntodeventa','tipodeorden','cantidad','fechaorden','added_by')
     #search_fields = ('libro','puntodeventa')
     list_filter = ('libro','puntodeventa','fechaorden',)
     exclude = ['added_by',]
