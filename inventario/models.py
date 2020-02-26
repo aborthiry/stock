@@ -76,6 +76,18 @@ class OrdenClasificada(models.Model):
     
 
 
+class Destinatario(models.Model):
+    nombre = models.CharField(max_length=100)
+    direccion = models.CharField("Dirección", max_length=50)
+    telefono = models.CharField("Teléfono", max_length=50)
+    
+    def __str__(self):
+        return self.nombre
+    
+    class Meta:
+        verbose_name = 'Destinatario'
+        verbose_name_plural = 'Destinatarios'    
+
 class Orden(models.Model):
     
     tipodeorden = models.CharField("Tipo de orden", max_length=1, choices=TIPO_DE_ORDEN,default='1')
@@ -88,11 +100,12 @@ class Orden(models.Model):
         auto_choose=True,
         blank=True, null=True,
         on_delete=models.PROTECT) '''
-    libro = models.ForeignKey(Libro, on_delete=models.PROTECT)
+    
     puntodeventa = models.ForeignKey(PuntoDeVenta, on_delete=models.PROTECT,verbose_name="Punto de venta")
-    cantidad = models.PositiveIntegerField()
+    
     nota = models.TextField(blank=True, null=True)
     fechaorden =  models.DateTimeField(auto_now_add=True, blank=False)
+    destinatario = models.ForeignKey(Destinatario, null=True, blank=True, on_delete=models.SET_NULL)
     added_by = models.ForeignKey(User,
         null=True, blank=True, on_delete=models.SET_NULL)
     
@@ -104,8 +117,8 @@ class Orden(models.Model):
         verbose_name_plural = 'Ordenes'
 
 
-
-
-
+class RenglonOrden(models.Model):
+    orden = models.ForeignKey(Orden,  on_delete=models.CASCADE) 
+    libro = models.ForeignKey(Libro, on_delete=models.PROTECT)
+    cantidad = models.PositiveIntegerField()
   
-    
