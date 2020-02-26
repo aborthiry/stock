@@ -1,11 +1,3 @@
-CREATE TRIGGER taiu_renglonorden
-  AFTER INSERT OR UPDATE
-  ON public.inventario_renglonorden
-  FOR EACH ROW
-  EXECUTE PROCEDURE public.faiu_renglonorden();
-
-
-
 CREATE OR REPLACE FUNCTION public.faiu_renglonorden()
   RETURNS trigger AS
 $BODY$
@@ -56,3 +48,9 @@ $BODY$
   $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
+
+CREATE TRIGGER taiu_renglonorden
+  AFTER INSERT OR UPDATE
+  ON public.inventario_renglonorden
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.faiu_renglonorden();
